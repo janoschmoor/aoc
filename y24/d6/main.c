@@ -80,10 +80,10 @@ int main() {
 	px = ppx;
 	dx = 0;
 	dy = -1;
-	int h[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
-	int hindex = 1;
+	// int h[8] = {-1, -1, -1, -1, -1, -1, -1, -1};
+	// int hindex = 1;
 	exit = 0;
-	int limit = 100000;
+	int limit = 1000000;
 
 
 	while (!exit) {
@@ -92,6 +92,7 @@ int main() {
 		limit--;
 		if (limit == 1) {
 			exit = 1;
+			r++;
 		}
 		
 
@@ -108,15 +109,17 @@ int main() {
 				int tempx = dx;
 				dx = -1*dy;
 				dy = tempx;
+
+				// int middle = (hindex+2) % 4;
 				
-				if (h[hindex*2] == px && h[hindex*2+1] == py) {
-					r++;
-					exit = 1;
-				} else {
-					h[hindex*2] = px;
-					h[hindex*2+1] = py;
-					hindex = (hindex+1) % 4;
-				}
+				// if (h[hindex*2] == px && h[hindex*2+1] == py && h[middle*2] != px && h[middle*2+1] != py) {
+					// r++;
+					// exit = 1;
+				// } else {
+					// h[hindex*2] = px;
+					// h[hindex*2+1] = py;
+					// hindex = (hindex+1) % 4;
+				// }
 				
 			} else {
 				dirok = 1;
