@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 int r(long *target, long value, long *input, int *len, int index) {
@@ -12,12 +11,10 @@ int r(long *target, long value, long *input, int *len, int index) {
 		return 0;
 	}
 
-	// printf("d%d: adding prev=%ld to input[%d]=%ld   => %ld\n", index, value, index, input[index], value+input[index]);
 	int p = r(target, value + *(input + index), input, len, index+1);
-	// printf("d%d: multiply prev=%ld to input[%d]=%ld   => %ld\n", index, value, index, input[index], value*input[index]);
 	int m = r(target, value * *(input + index), input, len, index+1);
 	
-	char buffer[129]; // Ensure it’s large enough for both numbers and a null terminator.
+	char buffer[129];
 	snprintf(buffer, sizeof(buffer), "%ld%ld", value, input[index]);
 
 	long concatenated = atol(buffer);
@@ -45,7 +42,6 @@ int main() {
 			target = target * 10 + (c - '0');
 		}
 
-		// printf("%ld\n", target);
 		fgetc(file); // ommit leading space
 		
 		long value = 0;
@@ -53,7 +49,6 @@ int main() {
 		while ((c = fgetc(file)) != '\n') {
 		
 			if (c == ' ') {
-				// printf("store %ld\n", value);
 				input[len] = value;
 				len++;
 				value = 0;
@@ -63,11 +58,6 @@ int main() {
 		}
 		input[len] = value;
 		len++;
-
-		// for (int i = 0; i < len; i++) {
-		// 	printf("%ld  ", input[i]);
-		// }
-		// printf("\n");
 
 		if (r(&target, *(input), input, &len, 1) >= 1) {
 			answer += target;
